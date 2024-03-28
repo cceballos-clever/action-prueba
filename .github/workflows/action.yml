@@ -1,0 +1,20 @@
+name: run script
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+
+jobs:
+  first_jobs:
+    name: Check current step number
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        
+      - name: run script
+        run: |
+          ./script.sh
+          
