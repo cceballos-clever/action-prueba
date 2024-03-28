@@ -21,4 +21,4 @@ jobs:
 
       - name: run name
         run: |
-          echo "my name is ${{ vars.NAME }}
+          echo "my name is ${{ vars.NAME }}"
