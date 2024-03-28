@@ -22,6 +22,7 @@ jobs:
   second_jobs:
       name: Check current step number again
       runs-on: ubuntu-latest
+      needs: first_jobs
       steps:
       - name: run name
         run: |
