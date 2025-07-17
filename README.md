@@ -31,7 +31,7 @@ Cuando el evento `pull_request` apunta a la rama `calidad`, se ejecuta:
 
 #### Jobs ejecutados:
 - `set-environment`: Establece el ambiente en base al destino del PR.
-- `pre-release`: Ejecuta la pre-liberación para validación previa al pase a producción.
+- `pre-release`:  A partir del branch actual, se remueve el sufijo "-SNAPSHOT" del `package.json`, se realiza un commit en una nueva rama con el mismo nombre, y se genera un tag. Ese tag será utilizado luego en el pipeline de Producción.
 
 ---
 
@@ -45,22 +45,12 @@ Cuando el `input.environment` es igual a `produccion`, se ejecutan:
 
 #### Jobs ejecutados:
 - `set-environment`: Establece el entorno productivo.
-- `release`: Lanza la versión del microfrontend usando el tag proporcionado.
+- `release`: Lanza la versión del microfrontend usando el tag proporcionado en "pre-release".
 
 > 🔁 Luego de `release`, podrían ejecutarse despliegues (actualmente deshabilitados):
 
 - `deploy-to-azure-app-service`: Despliegue a Azure App Service (`if: false`).
 - `deploy-to-azure-blob-storage-cdn`: Se ejecuta si `project == 'xdig'`.
-
----
-
-## 📂 Jobs por Ambiente
-
-| Ambiente     | Jobs ejecutados                                                                 |
-|--------------|----------------------------------------------------------------------------------|
-| desarrollo   | set-environment, build-node, sonarqube-unit-tests, snyk_SCA, snyk_SAST          |
-| calidad      | set-environment, pre-release                                                    |
-| producción   | set-environment, release (opcional: deploy-to-azure-app-service, blob-storage)  |
 
 ---
 
@@ -128,7 +118,7 @@ Automáticamente cuando se crea un Pull Request cuya rama destino es `calidad`.
 #### Jobs ejecutados:
 - `set-environment`: Detecta que se está trabajando sobre calidad.
 - `build`: Compila el microservicio.
-- `pre-release`: Ejecuta una pre-liberación del artefacto.
+- `pre-release`:  A partir del branch actual, se remueve el sufijo "-SNAPSHOT" del `pom.xml`, se realiza un commit en una nueva rama con el mismo nombre, y se genera un tag. Ese tag será utilizado luego en el pipeline de Producción.
 - `deploy-artifact-maven`: Publica el artefacto en Artifactory.
 - `build-image-to-delivery`: Crea y publica la imagen Docker.
 - `delivery-app`: Despliega la app en el entorno de OCP correspondiente.
@@ -146,7 +136,7 @@ Se activa manualmente, pasando:
 
 #### Jobs ejecutados:
 - `set-environment`: Detecta que se trata de un entorno productivo.
-- `release`: Ejecuta el proceso de liberación oficial (tag) del microservicio.
+- `release`: Lanza la versión del microservicio usando el tag proporcionado en "pre-release".
 - `deploy-artifact-maven`: Publica el artefacto si los jobs previos se activaran.
 - `build-image-to-delivery`: Construye y publica la imagen para producción.
 - `delivery-app`: Despliega la aplicación a OCP.
