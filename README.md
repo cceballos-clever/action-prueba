@@ -65,11 +65,4 @@ Se utilizó el repositorio [`frt-xdig-mf-loan`](https://github.com/pichincha-per
 
 ## Notas
 
-- Esta configuración es necesaria tanto para ambientes de desarrollo como para CI/CD.
 - La instalación puede requerir autenticación en cada entorno donde se utilice.
-
----
-
-## Contacto
-
-Ante cualquier duda o inconveniente, contactar con el equipo responsable del mantenimiento de estas librerías.
