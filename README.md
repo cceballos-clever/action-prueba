@@ -92,7 +92,7 @@ Cuando el `input.environment` es igual a `produccion`, se ejecutan:
 
 
 
-# 🛠️ Documentación - Microservicio Pipeline
+# 🛠️ Documentación - Pipeline Microservicio Gitlab
 
 Este pipeline está diseñado para manejar el ciclo de vida de un microservicio en tres ambientes: `desarrollo`, `calidad` y `producción`. Se ejecuta automáticamente según el tipo de evento (manual, `pull_request`, etc.) y los valores de `inputs`.
 
