@@ -169,8 +169,8 @@ Se activa manualmente, pasando:
 | `GH_PAT`                     | Token de acceso a GitHub.                                         |
 | `ARTIFACTORY_USER`           | Usuario para Artifactory.                                         |
 | `ARTIFACTORY_PASSWORD`       | Contraseña para Artifactory.                                      |
-| `SNYK_TOKEN`                 | Token de autenticación de Snyk (aunque deshabilitado).             |
-| `SONAR_TOKEN`                | Token para SonarQube (aunque deshabilitado).                      |
+| `SNYK_TOKEN`                 | Token de autenticación de Snyk.             |
+| `SONAR_TOKEN`                | Token para SonarQube.                      |
 | `EXTERNAL_REGISTRY_USR`      | Usuario para acceso al registry externo (Docker/Openshift).        |
 | `EXTERNAL_REGISTRY_PSW`      | Contraseña del registry externo.                                  |
 | `OCP_TOKEN`                  | Token para autenticación contra Openshift.                         |
