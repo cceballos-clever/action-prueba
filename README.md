@@ -45,7 +45,7 @@ Cuando el `input.environment` es igual a `produccion`, se ejecutan:
 
 #### Jobs ejecutados:
 - `set-environment`: Establece el entorno productivo.
-- `release`: Lanza la versión del microfrontend usando el tag proporcionado en "pre-release".
+- `release`: El release genera el tag con la versión final modificada, lo mergea a master y deja todo listo para la publicación en producción.
 
 > 🔁 Luego de `release`, podrían ejecutarse despliegues (actualmente deshabilitados):
 
@@ -136,7 +136,7 @@ Se activa manualmente, pasando:
 
 #### Jobs ejecutados:
 - `set-environment`: Detecta que se trata de un entorno productivo.
-- `release`: Lanza la versión del microservicio usando el tag proporcionado en "pre-release".
+- `release`: El release genera el tag con la versión final modificada, lo mergea a master y deja todo listo para la publicación en producción.
 - `deploy-artifact-maven`: Publica el artefacto si los jobs previos se activaran.
 - `build-image-to-delivery`: Construye y publica la imagen para producción.
 - `delivery-app`: Despliega la aplicación a OCP.
@@ -175,5 +175,4 @@ Se activa manualmente, pasando:
 - El job `set-environment` determina el ambiente a partir del branch o base del PR.
 - `prisma-cloud-scan` y `burp-scan` solo se ejecutan en el ambiente `desarrollo`.
 - `delivery-app` siempre corre al final si no hubo fallas previas.
-
-
+ 
