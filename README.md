@@ -116,8 +116,6 @@ Se activa manualmente mediante `workflow_call` y se debe pasar:
 - `delivery-app`: Despliega el microservicio en OCP.
 - `burp-scan`: Ejecuta análisis de seguridad dinámico (Burp Suite).
 
-> ⚠️ Los jobs de calidad (`snyk_SCA`, `snyk_SAST`, `sonarqube-unit-test`) están definidos pero actualmente deshabilitados (`if: false`).
-
 ---
 
 ## ✅ Calidad
@@ -134,8 +132,6 @@ Automáticamente cuando se crea un Pull Request cuya rama destino es `calidad`.
 - `deploy-artifact-maven`: Publica el artefacto en Artifactory.
 - `build-image-to-delivery`: Crea y publica la imagen Docker.
 - `delivery-app`: Despliega la app en el entorno de OCP correspondiente.
-
-> ℹ️ Los escaneos de seguridad y el Burp scan **no se ejecutan** en este ambiente.
 
 ---
 
@@ -154,25 +150,6 @@ Se activa manualmente, pasando:
 - `deploy-artifact-maven`: Publica el artefacto si los jobs previos se activaran.
 - `build-image-to-delivery`: Construye y publica la imagen para producción.
 - `delivery-app`: Despliega la aplicación a OCP.
-
----
-
-## 📋 Jobs por Ambiente
-
-| Job                         | Desarrollo | Calidad | Producción |
-|----------------------------|------------|---------|------------|
-| set-environment            | ✅         | ✅      | ✅         |
-| build                      | ✅         | ✅      | ❌         |
-| snyk_SCA                   | ❌ (definido pero desactivado) | ❌ | ❌ |
-| snyk_SAST                  | ❌ (definido pero desactivado) | ❌ | ❌ |
-| sonarqube-unit-test        | ❌ (definido pero desactivado) | ❌ | ❌ |
-| deploy-artifact-maven      | ✅         | ✅      | ✅         |
-| build-image-to-delivery    | ✅         | ✅      | ✅         |
-| pre-release                | ❌         | ✅      | ❌         |
-| release                    | ❌         | ❌      | ✅         |
-| prisma-cloud-scan          | ✅         | ❌      | ❌         |
-| delivery-app               | ✅         | ✅      | ✅         |
-| burp-scan                  | ✅         | ❌      | ❌         |
 
 ---
 
@@ -206,10 +183,7 @@ Se activa manualmente, pasando:
 ## 🧠 Notas adicionales
 
 - El job `set-environment` determina el ambiente a partir del branch o base del PR.
-- Los análisis de calidad con Snyk y Sonar están definidos pero deshabilitados.
 - `prisma-cloud-scan` y `burp-scan` solo se ejecutan en el ambiente `desarrollo`.
 - `delivery-app` siempre corre al final si no hubo fallas previas.
-- Los despliegues y builds usan workers `self-hosted` para ejecutar sobre infraestructura interna.
-
 
 
