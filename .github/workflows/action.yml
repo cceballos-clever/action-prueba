@@ -1,7 +1,7 @@
 name: Ejemplo contextos
 
 on:
-  push
+  workflow_dispatch:
 
 jobs:
   mostrar-contextos:
