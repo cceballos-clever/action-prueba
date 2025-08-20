@@ -5,10 +5,10 @@ on:
 
 jobs:
   mostrar-contextos:
+    if: ${{ github.ref == 'refs/heads/main' }}
     runs-on: ubuntu-latest
     steps:
       - name: Mostrar branch
-        if: ${{ github.ref == 'refs/heads/main' }}
         run: echo "La rama es ${{ github.ref }}"
       - name: Mostrar repo
         run: echo "El repo es ${{ github.repository }}"
