@@ -13,3 +13,7 @@ jobs:
         run: echo "La rama es ${{ github.ref }}"
       - name: Mostrar repo
         run: echo "El repo es ${{ github.repository }}"
+      - name: Mostrar repo
+        run: echo "El repo es $mi_nombre"
+        env:
+          mi_nombre: Cristian
