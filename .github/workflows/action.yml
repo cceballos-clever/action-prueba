@@ -18,6 +18,6 @@ jobs:
       - name: Mostrar repo
         run: echo "El repo es ${{ github.repository }}"
       - name: Mostrar nombre
-        run: echo "MI nombre es $mi_nombre"
+        run: echo "MI nombre es $mi_Nombre"
         #env:
           #mi_nombre: Cristian
