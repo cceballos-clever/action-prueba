@@ -3,6 +3,10 @@ name: Ejemplo contextos
 on:
   workflow_dispatch:
 
+env:
+  mi_nombre: Cristian
+
+
 jobs:
   mostrar-contextos:
     if: ${{ github.ref != 'refs/heads/develop' }}
@@ -14,6 +18,6 @@ jobs:
       - name: Mostrar repo
         run: echo "El repo es ${{ github.repository }}"
       - name: Mostrar repo
-        run: echo "El repo es $mi_nombre"
-        env:
-          mi_nombre: Cristian
+        run: echo "MI nombre es $mi_nombre"
+        #env:
+          #mi_nombre: Cristian
