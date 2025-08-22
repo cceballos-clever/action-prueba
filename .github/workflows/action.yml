@@ -24,7 +24,8 @@ jobs:
 
 
   mostrar-contextos-2:
-    if: ${{ github.ref != 'refs/heads/main' }}
+    needs: mostrar-contextos-1
+    if: ${{ github.ref == 'refs/heads/main' }}
     runs-on: ubuntu-latest
     steps:
       - name: mostrar variable
