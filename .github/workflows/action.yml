@@ -11,7 +11,7 @@ jobs:
   mostrar-contextos-1:
     if: ${{ github.ref != 'refs/heads/develop' }}
     #if: ${{ github.ref == 'refs/heads/main' }}
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     steps:
       - name: Mostrar branch
         run: echo "La rama es ${{ github.ref }}"
