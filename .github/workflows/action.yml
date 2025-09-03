@@ -8,12 +8,12 @@ on:
   workflow_dispatch:
 
 env:
-  mi_ombre: Cristian
+  mi_nombre: Cristian
 
 
 jobs:
   mostrar-contextos-1:
-    #if: ${{ github.ref != 'refs/heads/develop' }}
+    if: ${{ github.ref != 'refs/heads/develop' }}
     #if: ${{ github.ref == 'refs/heads/main' }}
     runs-on: ubuntu-latest
     steps:
