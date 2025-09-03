@@ -2,7 +2,9 @@ name: Ejemplo contextos
 
 on:
   pull_request:
-    types: [labeled]
+    types: 
+     - labeled
+     - unlabeled
 
 env:
   mi_nombre: Cristian
