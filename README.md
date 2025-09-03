@@ -1,3 +1,6 @@
+[![Ejemplo contextos](https://github.com/cceballos-clever/action-prueba/actions/workflows/action.yml/badge.svg)](https://github.com/cceballos-clever/action-prueba/actions/workflows/action.yml)
+
+
 # 📦 Documentación - Pipeline Microfrontend Gitlab
 
 Este pipeline está diseñado para ejecutarse en diferentes ambientes (`desarrollo`, `calidad` y `producción`) dependiendo de los inputs o eventos de GitHub. A continuación, se detalla cómo se ejecuta cada uno y qué hace.
