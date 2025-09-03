@@ -12,7 +12,7 @@ env:
 
 jobs:
   mostrar-contextos-1:
-    if: ${{ github.ref != 'refs/heads/develop' }}
+    #if: ${{ github.ref != 'refs/heads/develop' }}
     #if: ${{ github.ref == 'refs/heads/main' }}
     runs-on: self-hosted
     steps:
@@ -30,7 +30,7 @@ jobs:
 
   mostrar-contextos-2:
     needs: mostrar-contextos-1
-    if: ${{ github.ref == 'refs/heads/main' }}
+    #if: ${{ github.ref == 'refs/heads/main' }}
     runs-on: ubuntu-latest
     steps:
       - name: mostrar variable
