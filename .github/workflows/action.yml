@@ -18,7 +18,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: chechout
-        #uses: actions/checkout@v5
+        uses: actions/checkout@v5
       - name: Mostrar branch
         run: echo "La rama es ${{ github.ref }}"
       - name: Mostrar repo
