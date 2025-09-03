@@ -5,6 +5,7 @@ on:
     types: 
      - labeled
      - unlabeled
+  workflow_dispatch:
 
 env:
   mi_ombre: Cristian
