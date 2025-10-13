@@ -1,38 +1,97 @@
-name: Ejemplo contextos
+name: Frontend Pipeline
 
 on:
-  pull_request:
-    types: 
-     - labeled
-     - unlabeled
   workflow_dispatch:
-
-env:
-  mi_nombre: Cristian
-
+    inputs:
+      projectPath:
+        description: 'Ruta del proyecto'
+        required: true
+        default: '.'
+      buildPlatform:
+        description: 'Plataforma de build'
+        required: false
+      buildConfiguration:
+        description: 'Configuración de build'
+        required: false
+      dependencyOverrides:
+        description: 'Dependencias personalizadas (JSON)'
+        required: false
+      imageName:
+        description: 'Nombre de la imagen Docker'
+        required: false
+        default: 'catalogo-producto-fe'
+      dockerfilePath:
+        description: 'Ruta al Dockerfile'
+        required: false
+        default: 'Dockerfile'
+      nodeVersion:
+        description: 'Versión de Node.js'
+        required: false
+        default: '19'
+      tag:
+        description: 'Tag de la imagen'
+        required: false
+        default: 'pr-${{ github.head_ref || github.ref_name }}-${{ github.run_id }}'
 
 jobs:
-  mostrar-contextos-1:
-    #if: ${{ github.ref != 'refs/heads/develop' }}
-    #if: ${{ github.ref == 'refs/heads/develop' }}
-    runs-on: ubuntu-latest
-    steps:
-      - name: chechout
-        uses: actions/checkout@v5
-      - name: Mostrar branch
-        run: echo "La rama es ${{ github.ref }}"
-      - name: Mostrar repo
-        run: echo "El repo es ${{ github.repository }}"
-      - name: Mostrar nombre
-        run: echo "MI nombre es $mi_nombre"
-        #env:
-          #mi_nombre: Cristian
+  CI:
+    name: Build, Test & Scan
+    runs-on: windows-latest
 
-
-  mostrar-contextos-2:
-    needs: mostrar-contextos-1
-    #if: ${{ github.ref == 'refs/heads/main' }}
-    runs-on: ubuntu-latest
     steps:
-      - name: mostrar variable
-        run: echo "mi nombre es $mi_nombre"
+      - name: Checkout código principal
+        uses: actions/checkout@v4
+
+      - name: Checkout templates
+        uses: actions/checkout@v4
+        with:
+          repository: informaticaetb/DevOps-ETB  # 🔹 Cambia esto al repo correcto
+          path: templates
+          token: ${{ secrets.PAT_DEVOPS_ETB }}   # 🔹 Usa un PAT con acceso de lectura
+
+      - name: Configurar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ github.event.inputs.nodeVersion }}
+
+      - name: Cargar variables por ambiente
+        shell: pwsh
+        run: ./scripts/new-scripts/load-vars.ps1
+
+      - name: Build & Test FE
+        shell: pwsh
+        run: ./scripts/new-scripts/build-test-fe.ps1
+
+      - name: Mend Bolt Scan
+        if: false
+        shell: pwsh
+        run: ./scripts/new-scripts/mendbolt-scan.ps1
+
+      - name: Trivy Scan FE
+        if: false
+        shell: pwsh
+        run: ./scripts/new-scripts/trivy-Scan.ps1
+
+      - name: Build & Push Docker FE
+        if: false
+        shell: pwsh
+        run: ./scripts/new-scripts/build-push-image.ps1
+
+      - name: Upload Frontend Artifact
+        if: false
+        shell: pwsh
+        run: |
+          ./scripts/new-scripts/Upload-Artifact.ps1 `
+            -SourcePath "${{ github.workspace }}\build\fe-build" `
+            -ArtifactName "FE-Drop"
+
+  Deploy_Dev:
+    name: Deploy FE ACA (Dev)
+    runs-on: windows-latest
+    if: false  # 🔹 Igual que en el YAML original
+    needs: [CI]
+
+    steps:
+      - name: Desplegar Frontend a Azure Container Apps
+        shell: pwsh
+        run: ./scripts/new-scripts/deploy-aca.ps1
